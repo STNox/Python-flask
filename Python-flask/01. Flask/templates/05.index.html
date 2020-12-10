@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src = "{{url_for('static', filename='js/05.hello.js')}}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Web</title>
+</head>
+<body>
+    <input type="button" onclick="sayHello()" value="Say Hello"><br>
+    <img src="{{url_for('static', filename='img/hanguel.png')}}" alt="한글">
+</body>
+</html>
