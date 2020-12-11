@@ -25,6 +25,7 @@ station_data
 gov_data_api_key.txt
 bootstrap*
 static/
+weatherkey.txt
 
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
