@@ -20,4 +20,4 @@ def cur_weather():
     temp = round(float(temp)+0.01, 1)
     icon_url = "http://openweathermap.org/img/wn/" + icon + ".png"
 
-    return f'<span class="rounded-circle"><img src="{icon_url}", alt="날씨"></span><p class="align: middle"><strong>{desc}</strong>, 기온: <strong>{temp}&deg;C</strong> (최저 {temp_min}&deg;C/최고 {temp_max}&deg;C)</p>'
+    return f'<span class="rounded-circle"><img src="{icon_url}", alt="날씨"></span><strong>{desc}</strong>, 기온: <strong>{temp}&deg;C</strong> (최저 {temp_min}&deg;C/최고 {temp_max}&deg;C)'
