@@ -44,6 +44,11 @@ def main():
     menu = {'ho': 0, 'da': 1, 'ml': 0, 'se': 0, 'co': 0, 'ca': 0, 'cr': 0, 'st': 0, 'wc': 0}
     return render_template('main.html', menu=menu, weather=get_weather_main())
 
+@app.route('/park')
+def park():
+    menu = {'ho': 0, 'da': 1, 'ml': 0, 'se': 0, 'co': 0, 'ca': 0, 'cr': 0, 'st': 0, 'wc': 0}
+
+
 @app.route('/stock', methods=['GET', 'POST'])
 def stock():
     menu = {'ho': 0, 'da': 1, 'ml': 0, 'se': 0, 'co': 0, 'ca': 0, 'cr': 0, 'st': 1, 'wc': 0}
