@@ -1,0 +1,44 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>지역구별 범죄발생율과 검거율 상세</h3>
+    <hr>
+    <div class="row">
+        <div class="w-90 ml-5">
+            <iframe src="{{url_for('static', filename='img/crime_de.html', q=mtime)}}" frameborder="1" width="800" height="500"></iframe>
+        </div>
+        <div class="col-sm-11">
+            <table class="table">
+                <tr>
+                    <td class="text-center align-middle">
+                        발생율 보기
+                    </td>
+                    {% for key, value in option_dict1.items() %}
+                        <td class="text-center">
+                            <button class="btn btn-danger ml-3 mt-3" onclick="location.href='/seoul/crime_de/{{key}}'">
+                                {% if value == column_index %}<span class="spinner-grow spinner-grow-sm align-middle"></span>{% endif %}  {{value}}
+                            </button>
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="text-center align-middle">
+                        검거율 보기
+                    </td>
+                    {% for key, value in option_dict2.items() %}
+                        <td class="text-center">
+                            <button class="btn btn-success ml-3 mt-3" onclick="location.href='/seoul/crime_de/{{key}}'">
+                                {% if value == column_index %}<span class="spinner-grow spinner-grow-sm align-middle"></span>{% endif %}  {{value[:-3]}}
+                            </button>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <div class="text-right">
+                <button class="btn btn-primary ml-3 py-10" onclick="location.href='/seoul/crime'">전체 보기</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
