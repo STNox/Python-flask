@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app
 import pandas as pd
 import folium, os, json
-from weather import cur_weather
+from utils.weather import cur_weather
 
 seoul_bp = Blueprint('seoul_bp', __name__)
 

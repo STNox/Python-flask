@@ -72,8 +72,8 @@
                     <li class="nav-item dropdown">
                         <a id="li_carto" class="nav-link dropdown-toggle {% if menu.ca %}bg-danger text-white{% endif %}" data-toggle="dropdown" href="#">카토그램</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">인구소멸 위기 지역</a>
-                                <a class="dropdown-item" href="#">커피 지수</a>
+                                <a class="dropdown-item" href="/carto/pop_crisis/crisis_area">인구소멸 위기 지역</a>
+                                <a class="dropdown-item" href="/carto/coffee_index">커피 지수</a>
                             </div>
                     </li>
                     <div class="dropdown-divider"></div>
@@ -105,5 +105,6 @@
     <nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-light fixed-bottom">
         <span class="navbar-text">Copyright &copy; 2020, WY</span>
     </nav>
+    {% block additional_body %}{% endblock %}
 </body>
 </html>

@@ -3,10 +3,10 @@ import pandas as pd
 import os, folium, json, logging
 from logging.config import dictConfig
 import pandas_datareader as pdr
-from weather import cur_weather
+from utils.weather import cur_weather
 
 from bp1_seoul.seoul import seoul_bp
-from bp5_stock.simple import simple_bp
+from bp3_cartogram.carto import carto_bp
 from bp5_stock.stock import stock_bp
 
 import matplotlib as mpl
@@ -25,6 +25,7 @@ app.logger
 
 app.register_blueprint(stock_bp, url_prefix='/stock')
 app.register_blueprint(seoul_bp, url_prefix='/seoul')
+app.register_blueprint(carto_bp, url_prefix='/carto')
 
 ''' def get_weather_main():
     weather = None
