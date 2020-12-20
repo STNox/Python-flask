@@ -40,29 +40,43 @@ def cloud():
         mtime = int(os.stat(img_file).st_mtime)
         return render_template('wordcloud/wc_result.html', menu=menu, weather=cur_weather(), mtime=mtime)
 
-@cloud_bp.route('/hot_keyword')
-def hottie():
+@cloud_bp.route('/sports_keyword')
+def sports_news():
     driver = webdriver.Chrome(r'G:\\Workspace\\Data-analysis\\Data-analysis\\chromedriver.exe')
     events = ['kbaseball', 'wbaseball', 'kfootball', 'wfootball', 'basketball', 'volleyball', 'golf', 'general']
-    first_url = 'https://sports.news.naver.com/kbaseball/news/index.nhn?isphoto=N'
-    driver.get(first_url)
-    time.sleep(1)
-    pagi = driver.find_elements_by_css_selector('.paginate')
-    base_url = 'https://sports.news.naver.com/'
-    for i in len(pagi) + 1:
-        page_url = f'&page={i+1}'
-        for event in events:
-            event_url = f'{event}/news/index.nhn?isphoto=N'
-            url = base_url + event_url + page_url
+    titles = ''
+    for event in events:
+        event_url = f'https://sports.news.naver.com/{event}/news/index.nhn?isphoto=N'
+        driver.get(event_url)
+        time.sleep(1)
+        pagi = driver.find_element_by_id('_pageList')
+        pagi_a = pagi.find_elements_by_tag_name('a')
+        title_e = ''
+        for i in range(len(pagi_a) + 1):
+            page_url = f'&page={i+1}'
+            url = event_url + page_url
             driver.get(url)
             time.sleep(1)
-            news_list = driver.find_elements_by_css_selector('.news_list.text')
-            titles = ''
-            for news in news_list:
-                titles += news.find_element_by_class_name('title').text
-    text = open('./static/data/title.txt', 'w')
+            news_list = driver.find_element_by_id('_newsList')
+            news = news_list.find_elements_by_tag_name('li')
+            title = ''
+            for n in news:
+                text_area = n.find_element_by_class_name('text')
+                title += text_area.find_element_by_tag_name('span').text
+            title_e += title
+            time.sleep(1)
+        titles += title_e
+    driver.close()
+    text = open('./static/data/title.txt', 'w', encoding='utf-8')
     text.write(titles)
     text.close()
+
+    text = open('./static/data/title.txt', encoding='utf-8').read()
+    stopwds = []
+    img_file = os.path.join(current_app.root_path, 'static/img/sports_keyword.png')
+    wc.kor_cloud(text, None, stopwds, img_file)
+    mtime = int(os.stat(img_file).st_mtime)
+    return render_template('wordcloud/sports_keyword.html', menu=menu, weather=cur_weather(), mtime=mtime)
 
 
             
