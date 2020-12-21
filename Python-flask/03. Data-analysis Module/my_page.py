@@ -6,6 +6,7 @@ import pandas_datareader as pdr
 from utils.weather import cur_weather
 
 from bp1_seoul.seoul import seoul_bp
+from bp2_covid.covid import covid_bp
 from bp3_cartogram.carto import carto_bp
 from bp5_stock.stock import stock_bp
 from bp6_wordcloud.cloud import cloud_bp
@@ -24,9 +25,10 @@ with open('./logging.json', 'r') as file:
 dictConfig(config)
 app.logger
 
-app.register_blueprint(stock_bp, url_prefix='/stock')
 app.register_blueprint(seoul_bp, url_prefix='/seoul')
+app.register_blueprint(covid_bp, url_prefix='/covid')
 app.register_blueprint(carto_bp, url_prefix='/carto')
+app.register_blueprint(stock_bp, url_prefix='/stock')
 app.register_blueprint(cloud_bp, url_prefix='/cloud')
 
 ''' def get_weather_main():
