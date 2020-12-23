@@ -17,7 +17,7 @@
             width: 50px;
             height: 50px;
             margin: 6px;
-            background-color:lightslategray;
+            background-color:gray;
         }
         .dropdown:hover .dropdown-menu {
             display: block;
@@ -63,9 +63,9 @@
                     <li class="nav-item dropdown">
                         <a id="li_covid" class="nav-link dropdown-toggle {% if menu.co %}bg-danger text-white{% endif %}" data-toggle="dropdown" href="#">코로나-19</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/covid/national_status">전국 현황</a>
-                                <a class="dropdown-item" href="#">광역시도별 현황</a>
-                                <a class="dropdown-item" href="#">서울 자치구별 현황</a>
+                                <a class="dropdown-item" href="/covid/national_status">광역시도별 현황</a>
+                                <a class="dropdown-item" href="/covid/age_gender">연령별, 성별 현황</a>
+                                <a class="dropdown-item" href="/covid/abroad">해외 현황</a>
                             </div>
                     </li>
                     <div class="dropdown-divider"></div>
