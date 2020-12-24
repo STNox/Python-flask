@@ -70,4 +70,35 @@ def get_abroad(date):
     conn.close()
     return rows
 
-    
+def get_capital_area():
+    conn = sqlite3.connect('./DB/covid_1.db')
+    cur = conn.cursor()
+    sql = "select def_cnts from covid_status where region in ('서울', '경기', '인천');"
+    cur.execute(sql)
+    rows = cur.fetchall()
+    cols = [column[0] for column in cur.description]
+    cur.close()
+    conn.close()
+    return rows, cols
+
+def get_metropol():
+    conn = sqlite3.connect('./DB/covid_1.db')
+    cur = conn.cursor()
+    sql = "select def_cnts from covid_status where region in ('세종', '대전', '대구', '광주', '울산', '부산', '제주');"
+    cur.execute(sql)
+    rows = cur.fetchall()
+    cols = [column[0] for column in cur.description]
+    cur.close()
+    conn.close()
+    return rows, cols
+
+def get_national_status():
+    conn = sqlite3.connect('./DB/covid_1.db')
+    cur = conn.cursor()
+    sql = "select date, inc_decs from covid_status where region='합계';"
+    cur.execute(sql)
+    rows = cur.fetchall()
+    cols = [column[0] for column in cur.description]
+    cur.close()
+    conn.close()
+    return rows, cols

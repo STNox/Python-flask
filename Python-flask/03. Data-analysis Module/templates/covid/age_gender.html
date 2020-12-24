@@ -28,13 +28,13 @@
         <tr>
             <th>연령</th>
             <th style="text-align: right;">확진자</th>
-            <th style="text-align: right;">확진률(%)</th>
+            <th style="text-align: right;">확진자 비중(%)</th>
             <th style="text-align: right;">치명률(%)</th>
             <th style="text-align: right;">사망자</th>
             <th style="text-align: right;">사망자 비중(%)</th>
         </tr>
         {% for row in rows %}
-            {% if loop.index == 10 %}
+            {% if loop.index == 10 %} <!--index 1부터 시작-->
                 <tr>
                     <th>성별</th><th></th><th></th><th></th><th></th><th></th>
                 </tr>

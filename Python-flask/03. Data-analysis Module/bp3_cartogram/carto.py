@@ -19,7 +19,7 @@ def pop_cri(option):
     mtime = int(os.stat(img_file).st_mtime)
     return render_template('cartogram/pop_cri.html', menu=menu, weather=cur_weather(), mtime=mtime, option=option, columns=columns)
 
-@carto_bp.route('/coffee_index', methods=['GET', 'POST'])
+@carto_bp.route('/coffee', methods=['GET', 'POST'])
 def coffee():
     if request.method == 'GET':
         return render_template('cartogram/coffee.html', menu=menu, weather=cur_weather())
