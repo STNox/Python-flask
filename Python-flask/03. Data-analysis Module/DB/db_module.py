@@ -40,6 +40,16 @@ def insert_abroad(params):
     conn.close()
     return
 
+def insert_seoul(params):
+    conn = sqlite3.connect('./DB/covid_1.db')
+    cur = conn.cursor()
+    sql = 'insert into seoul(date, id_nm, dist, history, move, status) values(?, ?, ?, ?, ?, ?);'
+    cur.execute(sql, params)
+    conn.commit()
+    cur.close()
+    conn.close()
+    return
+
 def get_status(date):
     conn = sqlite3.connect('./DB/covid_1.db')
     cur = conn.cursor()
@@ -73,19 +83,28 @@ def get_abroad(date):
 def get_capital_area():
     conn = sqlite3.connect('./DB/covid_1.db')
     cur = conn.cursor()
-    sql = "select def_cnts from covid_status where region in ('서울', '경기', '인천');"
+    sql = "select date, inc_decs from covid_status where region in ('서울', '경기', '인천');"
     cur.execute(sql)
     rows = cur.fetchall()
-    cols = [column[0] for column in cur.description]
     cur.close()
     conn.close()
-    return rows, cols
+    return rows
 
 def get_metropol():
     conn = sqlite3.connect('./DB/covid_1.db')
     cur = conn.cursor()
-    sql = "select def_cnts from covid_status where region in ('세종', '대전', '대구', '광주', '울산', '부산', '제주');"
+    sql = "select date, inc_decs from covid_status where region in ('세종', '대전', '대구', '광주', '울산', '부산', '제주');"
     cur.execute(sql)
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return rows
+
+def get_region(region):
+    conn = sqlite3.connect('./DB/covid_1.db')
+    cur = conn.cursor()
+    sql = 'select date, inc_decs from covid_status where region=?'
+    cur.execute(sql, (region,))
     rows = cur.fetchall()
     cols = [column[0] for column in cur.description]
     cur.close()

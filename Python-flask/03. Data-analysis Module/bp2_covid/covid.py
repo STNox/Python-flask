@@ -76,20 +76,66 @@ def visual():
         img_file = os.path.join(current_app.root_path, 'static/img/cov_national.png')
         plt.savefig(img_file)
         mtime = int(os.stat(img_file).st_mtime)
-        regions = ['세종', '대전', '대구', '광주', '울산', '부산', '제주']
+        regions = ['서울', '경기', '인천', '충남', '충북', '강원', '경북', '경남', '전북', '전남', '세종', '대전', '대구', '광주', '울산', '부산', '제주']
 
         return render_template('covid/visual.html', menu=menu, weather=cur_weather(), mtime=mtime, regions=regions)
     else:    
         dist = request.form['district']
         if dist == '수도권':
-            rows, cols = dm.get_capital_area()
+            rows = dm.get_capital_area()
+            seo, gye, inc, date = [], [], [], []
+            for i in range(int(len(rows)/3)):
+                seo.append(rows[3 * i + 2][1])
+                gye.append(rows[3 * i][1])
+                inc.append(rows[3 * i + 1][1])
+                date.append(rows[3 * i][0])
+            df = pd.DataFrame({
+                'date': date,
+                '서울': seo,
+                '경기': gye,
+                '인천': inc
+            })
+            df = df.drop_duplicates()
         elif dist =='광역시':
-            rows, cols = dm.get_metropol()
+            rows = dm.get_metropol()
+            sej, daj, dag, gwa, uls, bus, jej, date = [], [], [], [], [], [], [], []
+            for i in range(int(len(rows)/7)):
+                jej.append(rows[7 * i][1])
+                sej.append(rows[7 * i + 1][1])
+                uls.append(rows[7 * i + 2][1])
+                daj.append(rows[7 * i + 3][1])
+                gwa.append(rows[7 * i + 4][1])
+                dag.append(rows[7 * i + 5][1])
+                bus.append(rows[7 * i + 6][1])
+                date.append(rows[7 * i][0])
+            df = pd.DataFrame({
+                'date': date,
+                '세종': sej,
+                '부산': bus,
+                '대전': daj,
+                '광주': gwa,
+                '대구': dag,
+                '울산': uls,
+                '제주': jej
+            })
+            df = df.drop_duplicates()
+        else:
+            region_nm = request.form['region_name']
+            rows, cols = dm.get_region(region_nm)
+            df = pd.DataFrame.from_records(data=rows, columns=cols)
         
-        df = pd.DataFrame.from_records(data=rows, columns=cols)
-        fig = df.plot(figsize=(12, 5))
+        df.date = pd.to_datetime(df.date)
+        df.plot(x='date', figsize=(20, 10))
+        plt.xlabel('')
+        plt.xticks(fontsize=20)
+        plt.ylabel('신규 확진자(명)', fontsize=20)
+        plt.yticks(fontsize=20)
+        plt.grid(True)
+        plt.legend(loc='best', fontsize=20)
+        if cols:
+            plt.legend().set_visible(False)
         img_file = os.path.join(current_app.root_path, 'static/img/cov_metropol.png')
-        fig.savefig(img_file)
+        plt.savefig(img_file)
         mtime = int(os.stat(img_file).st_mtime)
         
-        return render_template('covid/visual_res.html', menu=menu, weather=cur_weather(), mtime=mtime)
+        return render_template('covid/visual_res.html', menu=menu, weather=cur_weather(), mtime=mtime, region_nm=region_nm)
