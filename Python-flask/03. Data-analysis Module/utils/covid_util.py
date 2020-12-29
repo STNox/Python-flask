@@ -93,28 +93,29 @@ def add_abroad(date):
     current_app.logger.info(f'{date} abroad data successfully inserted.')
 
 def add_seoul():
-    first_url = 'http://openapi.seoul.go.kr:8088/sample/xml/Corona19Status/1/1'
+    first_url = 'http://openapi.seoul.go.kr:8088/{seoul_key}/xml/Corona19Status/1/1'
     first_result = requests.get(first_url)
     tmp_soup = BeautifulSoup(first_result.text, 'xml')
     count = tmp_soup.find('list_total_count').get_text()
-    url = f'http://openapi.seoul.go.kr:8088/{seoul_key}/xml/Corona19Status/1/{count}'
-    result = requests.get(url)
-    soup = BeautifulSoup(result.txt, 'xml')
+    for i in range(int(int(count) / 1000) + 1):
+        url = f'http://openapi.seoul.go.kr:8088/{seoul_key}/xml/Corona19Status/1/{1000 * i + 1000}'
+        result = requests.get(url)
+        soup = BeautifulSoup(result.text, 'xml')
 
-    rows = soup.find_all('row')
-    for row in rows:
-        date = '2020-'
-        date_r = row.find('CORONA19_DATE').string[:-1].replace('.', '-')
-        date += date_r
-        date = datetime.strptime(date, '%Y-%m-%d')
-        date = date.strftime('%Y-%m-%d')
-        id_nm = row.find('CORONA19_ID').string
-        dist = row.find('CORONA19_AREA').string
-        history = row.find('CORONA19_CONTACT_HISTORY').string
-        move = row.find('CORONA19_MOVING_PATH').string if row.find('CORONA19_MOVING_PATH') else ''
-        status = row.find('CORONA19_LEAVE_STATUS').string if row.find('CORONA19_LEAVE_STATUS') else ''
+        rows = soup.find_all('row')
+        for row in rows:
+            date = '2020-'
+            date_r = row.find('CORONA19_DATE').string[:-1].replace('.', '-')
+            date += date_r
+            date = datetime.strptime(date, '%Y-%m-%d')
+            date = date.strftime('%Y-%m-%d')
+            id_nm = row.find('CORONA19_ID').string
+            dist = row.find('CORONA19_AREA').string
+            history = row.find('CORONA19_CONTACT_HISTORY').string
+            move = row.find('CORONA19_MOVING_PATH').string if row.find('CORONA19_MOVING_PATH') else ''
+            status = row.find('CORONA19_LEAVE_STATUS').string if row.find('CORONA19_LEAVE_STATUS') else ''
 
-        params = [date, id_nm, dist, history, move, status]
-        dm.insert_seoul(params)
+            params = [date, id_nm, dist, history, move, status]
+            dm.insert_seoul(params)
         
     current_app.logger.info('seoul data successfully inserted.')

@@ -125,7 +125,7 @@ def get_national_status():
 def get_seoul(date):
     conn = sqlite3.connect('./DB/covid_1.db')
     cur = conn.cursor()
-    sql = 'select id_nm from seoul where date=?'
+    sql = 'select id_nm, dist from seoul where date=?'
     cur.execute(sql, (date,))
     rows = cur.fetchall()
     cols = [column[0] for column in cur.description]

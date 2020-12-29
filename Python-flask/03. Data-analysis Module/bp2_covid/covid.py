@@ -63,9 +63,17 @@ def update_abroad(date):
 @covid_bp.route('/seoul')
 def seoul():
     date = request.args.get('date', datetime.now().strftime('%Y-%m-%d'))
-    rows = dm.get_seoul(date)
+    rows, cols = dm.get_seoul(date)
 
     return render_template('covid/seoul.html', menu=menu, weather=cur_weather(), rows=rows, date=date)
+
+@covid_bp.route('/update_seoul/<date>')
+def update_seoul(date):
+    rows = dm.get_seoul(date)
+    if len(rows) == 0:
+        cu.add_seoul()
+    
+    return redirect(url_for('covid_bp.seoul')+f'?date={date}')
 
 @covid_bp.route('/visual', methods=['GET', 'POST'])
 def visual():
