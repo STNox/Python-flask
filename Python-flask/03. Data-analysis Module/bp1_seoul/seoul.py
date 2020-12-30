@@ -192,3 +192,7 @@ def crime_de(option):
     map.save(html_file)
     mtime = int(os.stat(html_file).st_mtime)
     return render_template('seoul/crime_de.html', menu=menu, weather=cur_weather(), option=option, option_dict1=option_dict1, option_dict2=option_dict2, column_index=column_index, mtime=mtime)
+
+@seoul_bp.route('/cctv')
+def cctv():
+    cctv = pd.read_csv('./static/data/CCTV_result.csv')
