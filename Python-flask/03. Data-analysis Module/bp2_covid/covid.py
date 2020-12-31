@@ -135,8 +135,8 @@ def visual():
             })
             df = df.drop_duplicates()
         else:
-            region_nm = request.form['region_name']
-            rows, cols = dm.get_region(region_nm)
+            dist = request.form['region_name']
+            rows, cols = dm.get_region(dist)
             df = pd.DataFrame.from_records(data=rows, columns=cols)
         
         df.date = pd.to_datetime(df.date)
@@ -147,10 +147,10 @@ def visual():
         plt.yticks(fontsize=20)
         plt.grid(True)
         plt.legend(loc='best', fontsize=20)
-        if cols:
+        if dist == request.form['region_name']:
             plt.legend().set_visible(False)
         img_file = os.path.join(current_app.root_path, 'static/img/cov_metropol.png')
         plt.savefig(img_file)
         mtime = int(os.stat(img_file).st_mtime)
         
-        return render_template('covid/visual_res.html', menu=menu, weather=cur_weather(), mtime=mtime, region_nm=region_nm)
+        return render_template('covid/visual_res.html', menu=menu, weather=cur_weather(), mtime=mtime, dist=dist)

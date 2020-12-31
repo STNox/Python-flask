@@ -77,3 +77,25 @@ def genie_chart():
 
         chart_list.append([thumbn, title, artist])
     return chart_list
+
+def movies():
+    url = 'http://www.cgv.co.kr/movies/'
+    header = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
+    req = requests.get(url, headers=header)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
+
+    chart_sec = soup.find('div', {'class': 'sect-movie-chart'})
+    lis = chart_sec.find_all('li')
+    imgs, titles, scores, dates, kinds = [], [], [], [], []
+    for li in lis:
+        span = li.find('span', {'class': 'thumb-image'})
+        imgs.append(span.find('img').attrs['src'])
+        box = li.find('div', {'class': 'box-contents'})
+        titles.append(box.find('strong', {'class': 'title'}).string)
+        scores.append(box.find('span', {'class': 'percent'}).string)
+        release_date = box.find('span', {'class': 'txt-info'})
+        dates.append(release_date.find('strong').string)
+        kinds.append(release_date.find('span').string)
+
+    return imgs, titles, scores, dates, kinds

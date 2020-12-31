@@ -2,7 +2,7 @@
 {% block weather %}{{ weather | safe() }}{% endblock %}
 {% block content %}
 <div class="col-10" style="margin-top: 40px;">
-    <h3>코로나 신규 확진자 추이 - <small>{{region_nm}}</small></h3>
+    <h3>코로나 신규 확진자 추이 - <small>{{dist}}</small></h3>
     <hr>
     <div class="text-center">
         <img src="{{url_for('static', filename='img/cov_metropol.png', q=mtime)}}" alt="전국 확진자" width="1000px"><br>
