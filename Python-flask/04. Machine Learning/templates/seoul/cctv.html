@@ -1,0 +1,16 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>서울시 CCTV 현황</h3>
+    <hr>
+    <iframe src="{{url_for('static', filename='img/cctv.html', q=mtime)}}" frameborder="1" width="800" height="500"></iframe>
+    <div class="text-center">
+        <form method="post">
+            <input type="radio" name="kind" value="소계"> 소계
+            <input type="radio" name="kind" value="cctv비율"> cctv비율
+            <button class="btn btn-success" type="submit">그래프로 보기</button>
+        </form>
+    </div>
+</div>    
+{% endblock %}

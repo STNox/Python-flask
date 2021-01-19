@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>워드클라우드 결과</h3>
+    <hr>
+    <div class="text-center">
+        <img src="{{url_for('static', filename='img/sports_keyword.png', q=mtime)}}" alt="워드클라우드" width="800px"><br><br>
+        <button class="btn btn-primary" onclick="location.href='/cloud/sports_keyword'">재실행</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>서울 지역구별 범죄발생율과 검거율</h3>
+    <hr>
+    <div class="w-90 ml-5">
+        <iframe src="{{url_for('static', filename='img/crime.html', q=mtime)}}" frameborder="1" width="800" height="500"></iframe>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary mt-3" onclick="location.href='/seoul/crime_de/violence'">상세정보 보기</button>
+    </div>
+{% endblock %}

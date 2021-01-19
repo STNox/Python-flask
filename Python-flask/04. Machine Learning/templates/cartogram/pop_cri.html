@@ -1,0 +1,20 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>인구소멸위기 지역</h3>
+    <hr>
+    <div class="row">
+        <div class="mx-auto">
+            <img src="{{url_for('static', filename='img/pop_cri.png', q=mtime)}}" alt="인구위기" width="600">
+        </div>
+        <div class="mx-auto">
+            <button class="btn btn-success ml-3 mt-3" onclick="location.href='/carto/pop_crisis/crisis_area'">
+                {% if option == 'crisis_area' %}<span class="spinner-grow spinner-grow-sm align-middle"></span>{% endif %}  소멸위기지역
+            </button><br>
+            <button class="btn btn-success ml-3 mt-3" onclick="location.href='/carto/pop_crisis/crisis_ratio'">
+                {% if option == 'crisis_ratio' %}<span class="spinner-grow spinner-grow-sm align-middle"></span>{% endif %}  소멸비율
+            </button>
+        </div>
+    </div>
+{% endblock %}

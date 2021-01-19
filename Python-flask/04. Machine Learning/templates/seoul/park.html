@@ -1,0 +1,29 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>서울 공원현황</h3>
+    <hr>
+    <div class="w-90 ml-5">
+    <form class="form-inline text-align: center" action="/seoul/park" method="post">
+        <input class="form-check-input" type="radio" id="distinct" name="distinct" value="name" checked>공원명: 
+        <select class="custom-select my-2 mx-2" id="name" name="name">
+            {% for park in park_list %}
+                <option value="{{park}}">{{park}}</option>
+            {% endfor %}
+        </select>
+        <input class="form-check-input" type="radio" id="distinct" name="distinct" value="dist">자치구:
+        <select class="custom-select my-2 mx-2" id="dist" name="dist">
+            {% for dist in dist_list %}
+                <option value="{{dist}}">{{dist}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary my-2 ml-5">검색</button>
+    </form>
+    </div>
+    <br>
+    <div class="w-90 ml-5">
+        <iframe src="{{url_for('static', filename='img/park.html', q=mtime)}}" frameborder="1" width="800" height="500"></iframe>
+    </div>
+</div>
+{% endblock %}

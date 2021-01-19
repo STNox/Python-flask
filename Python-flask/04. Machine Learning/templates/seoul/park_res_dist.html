@@ -1,0 +1,41 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>서울 주요 공원 현황 - <small>{{dist_result.dist}}</small></h3>
+    <table class="table table-condensed">
+        <tr>
+            <td></td>
+            <td>{{dist_result.dist}}</td>
+            <td>서울시 평균</td>
+        </tr>
+        <tr>
+            <td>공원면적</td>
+            <td>{{dist_result.area}}㎡</td>
+            <td>{{dist_result.area_mean}}㎡</td>
+        </tr>
+        <tr>
+            <td>공원 수</td>
+            <td>{{dist_result.count}}개</td>
+            <td>{{dist_result.count_mean}}개</td>
+        </tr>
+        <tr>
+            <td>공원면적 비율</td>
+            <td>{{dist_result.area_ratio}}%</td>
+            <td>{{dist_result.ar_mean}}%</td>
+        </tr>
+        <tr>
+            <td>인당 공원면적</td>
+            <td>{{dist_result.app}}㎡</td>
+            <td>{{dist_result.app_mean}}㎡</td>
+        </tr>
+    </table>
+    <br>
+    <div class="w-90 ml-5">
+        <iframe src="{{url_for('static', filename='img/park_res_dist.html', q=mtime)}}" frameborder="1" width="800" height="500"></iframe>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary btn-sm float: center" style="float: center" onclick="location.href='/seoul/park'">재검색</button>
+    </div>
+    <br><br><br>
+{% endblock %}

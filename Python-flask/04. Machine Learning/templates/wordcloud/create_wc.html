@@ -1,0 +1,54 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>텍스트 파일로 워드클라우드 만들기</h3>
+    <hr>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form method="post" action="/cloud/create_wc" enctype="multipart/form-data">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="align-middle">언어 선택</td>
+                        <td>
+                            <input type="radio" name="lang" value="ko" checked> 한국어&nbsp;
+                            <input type="radio" name="lang" value="en"> 영어
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">텍스트 파일</td>
+                        <td>
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="txt" name="txt">
+                                <label class="custom-file-label" for="txt">텍스트 파일 선택</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">이미지 파일</td>
+                        <td>
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="mask" name="mask">
+                                <label class="custom-file-label" for="mask">이미지 파일 선택</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>제외할 단어(STOPWORDS)</td>
+                        <td>
+                            <textarea class="form-control" style="resize: none" name="stopwords" id="stopwords" cols="80" rows="15"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">실행</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+{% endblock %}

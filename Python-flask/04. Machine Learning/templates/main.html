@@ -1,0 +1,44 @@
+{% extends "basic.html" %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>Carousel <i class="fas fa-gamepad"></i></h3>
+    <hr>
+    <div id="demo" class="carousel slide" data-ride="carousel" style="margin-top: 40px; text-align: center;">
+        <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{url_for('static', filename='img/London.jpg')}}" alt="London" height="500">
+                <div class="carousel-caption">
+                    <h3>London</h3>
+                    <p>Big Ben</p>
+                </div>   
+            </div>
+            <div class="carousel-item">
+                <img src="{{url_for('static', filename='img/Paris.jpg')}}" alt="Paris" height="500">
+                <div class="carousel-caption">
+                    <h3>Paris</h3>
+                    <p>Eiffel Tower</p>
+                </div>   
+            </div>
+            <div class="carousel-item">
+                <img src="{{url_for('static', filename='img/Venice.jpg')}}" alt="Venice" height="500">
+                <div class="carousel-caption">
+                    <h3>Venice</h3>
+                    <p>Souvenir Shop</p>
+                </div>   
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</div>
+{% endblock %}
+{% block weather %}{{ weather | safe() }}{% endblock %}

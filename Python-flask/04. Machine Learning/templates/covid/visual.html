@@ -1,0 +1,36 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>대한민국 코로나 신규 확진자 추이</h3>
+    <hr>
+    <div class="text-center">
+        <img src="{{url_for('static', filename='img/cov_national.png', q=mtime)}}" alt="전국 확진자" width="1000px"><br>
+        <form method="post">
+            <div class="col-sm-9 text-center">
+                <table class="table table-borderless text-align: center;">
+                    <tr>
+                        <td>
+                            <input type="radio" name="district" value="수도권" checked> 수도권 추이
+                        </td>
+                        <td>
+                            <input type="radio" name="district" value="광역시"> 주요 도시 추이
+                        </td>
+                        <td>
+                            <input type="radio" name="district" value="기타"> 지역 선택
+                        </td>
+                        <td>
+                            <select name="region_name" class="custom-select">
+                                {% for region in regions %}
+                                <option value="{{region}}">{{region}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <button class="btn btn-primary" type="submit">보기</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

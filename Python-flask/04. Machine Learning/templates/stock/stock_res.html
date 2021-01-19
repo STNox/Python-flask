@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3><small>주가 예측 결과</small> - {{comp_name}}</h3>
+    <hr>
+    <div class="text-center">
+        <img src="{{url_for('static', filename='img/stock.png', q=mtime)}}" alt="예측 결과" width="800px"><br>
+        <button class="btn btn-primary" onclick="location.href='/stock/stock'">재실행</button>
+    </div>
+</div>
+{% endblock %}
+{% block weather %}{{ weather | safe() }}{% endblock %}

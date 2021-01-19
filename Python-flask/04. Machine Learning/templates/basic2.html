@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='fontawesome-free-5.15.1-web/css/all.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/favicon.ico')}}">
+    <script src="{{url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <style type="text/css">
+        a:link {color: black; text-decoration: none;}
+        a:visited{color: black; text-decoration: none;}
+        a:hover{color: red; text-decoration: underline;}
+        .rounded-circle {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 6px;
+            background-color:lightblue;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+    </style>
+    <title>Machine Learning</title>
+    {% block another_head %}{% endblock %}
+</head>
+<body>
+    <nav id="top" class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='img/hanguel.png')}}" alt="테스트" height="40px" style="margin-left: 10px;">
+        </a>
+        <!-- Links -->
+        <ul class="nav mr-auto nav-pills">
+            <li class="nav-item">
+                <a class="nav-link {% if menu.da %}bg-secondary{% endif %}" style="color: white; margin-left: 5px;" href="/main"><i class="far fa-chart-bar" style="margin-right: 10px"></i>데이터분석</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if menu.ml %}bg-secondary{% endif %}" style="color: white" href="/MaLe"><i class="fas fa-network-wired" style="margin-right: 10px"></i>머신 러닝</a>
+            </li>
+        </ul>
+        <div class="navbar-text fixed-right rounded-lg" id="weather" style="color:white; margin-right: 30px">
+            {% block weather %}{% endblock %}
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-2" style="margin-top: 40px;">
+                <ul class="nav flex-column nav-pills" style="margin-top: 5px; text-align: right">
+                    <li class="nav-item dropdown">
+                        <a id="li_class" class="nav-link dropdown-toggle {% if menu.cf %}bg-danger text-white{% endif %}" data-toggle="dropdown" href="#">분류</a>
+                            <div class="dropdown-menu">
+                                <h5 class="dropdown-header" style="text-align: right">이진 분류</h5>
+                                <a class="dropdown-item" style="text-align: right" href="/class/cancer">유방암</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">피마 원주민</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">타이타닉 승객</a>
+                                <div class="dropdown-divider"></div>
+                                <h5 class="dropdown-header" style="text-align: right">다중 분류</h5>
+                                <a class="dropdown-item" style="text-align: right" href="#">붓꽃</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">와인</a>
+                            </div>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item dropdown">
+                        <a id="li_cladv" class="nav-link dropdown-toggle {% if menu.ac %}bg-danger text-white{% endif %}" data-toggle="dropdown" href="#">고급 분류</a>
+                            <div class="dropdown-menu">
+                                <h5 class="dropdown-header" style="text-align: right">감성 분류</h5>
+                                <a class="dropdown-item" style="text-align: right" href="#">네이버 영화평</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">IMDB 영화평</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="text-align: right" href="#">뉴스그룹</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">MNIST 손글씨</a>
+                            </div>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item dropdown">
+                        <a id="li_regre" class="nav-link dropdown-toggle {% if menu.re %}bg-danger text-white{% endif %}" data-toggle="dropdown" href="#">회귀</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" style="text-align: right" href="#">당뇨병 BMI</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">붓꽃</a>
+                                <a class="dropdown-item" style="text-align: right" href="#">주가 예측</a>
+                            </div>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item">
+                        <a id="li_clust" class="nav-link {% if menu.cl %}bg-danger text-white{% endif %}" href="#">군집화/PCA</a>
+                    </li>
+                </ul>
+            </div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <br><br><br><br>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-light fixed-bottom">
+        <span class="navbar-text">Copyright &copy; 2020, WY</span>
+    </nav>
+    {% block additional_body %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>커피 지수</h3>
+    <hr>
+    <div class="w-90 ml-5">
+        <form method="post" action="/carto/coffee" enctype="multipart/form-data">
+            <div class="col-sm-8 text-align: center">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>카토그램 보기:</td>
+                        <td>
+                            <select name="carto_list" class="custom-select">
+                                {% for carto in ['스타벅스 매장수', '커피빈 매장수', '빽다방 매장수', '이디야 매장수', '커피지수'] %}
+                                    <option value="{{carto}}">{{carto}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CSV 파일:</td>
+                        <td>
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="csv" name="csv">
+                                <label class="custom-file-label" for="csv">업로드할 파일 선택</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">확인</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block additional_body %}
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+{% endblock %}
