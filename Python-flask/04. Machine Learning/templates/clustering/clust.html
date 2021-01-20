@@ -1,0 +1,38 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>군집화</h3>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+        <table class="table table-borderless text-align: center;">
+            <tr>
+                <td class="align-middle" style="text-align: right;">데이터 파일</td>
+                <td>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="file" name="file">
+                        <label class="custom-file-label" for="raw_data">데이터 파일 선택</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="align-middle" style="text-align: right;">
+                    군집 개수 입력
+                </td>
+                <td style="text-align: left;">
+                    <input type="text" class="form-control" name="n" placeholder="숫자 입력">
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" type="submit">보기</button>
+    </form>
+</div>
+{% endblock %}
+{% block additional_body %}
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+{% endblock %}
