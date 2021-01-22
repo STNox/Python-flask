@@ -12,6 +12,7 @@ from bp4_crawling.crawl import crawl_bp
 from bp5_stock.stock import stock_bp
 from bp6_wordcloud.cloud import cloud_bp
 from bp7_classification.clsft import clsft_bp
+from bp8_upperclass.upcls import upcls_bp
 from bp9_regression.regre import regre_bp
 from bp10_clustering.clust import clust_bp
 
@@ -36,6 +37,7 @@ app.register_blueprint(crawl_bp, url_prefix='/crawl')
 app.register_blueprint(stock_bp, url_prefix='/stock')
 app.register_blueprint(cloud_bp, url_prefix='/cloud')
 app.register_blueprint(clsft_bp, url_prefix='/class')
+app.register_blueprint(upcls_bp, url_prefix='/upcls')
 app.register_blueprint(regre_bp, url_prefix='/regre')
 app.register_blueprint(clust_bp, url_prefix='/clust')
 

@@ -2,16 +2,16 @@
 {% block weather %}{{ weather | safe() }}{% endblock %}
 {% block content %}
 <div class="col-10" style="margin-top: 40px;">
-    <h3>군집화</h3>
+    <h3>군집화 - <small>군집 개수: {{n_cluster}}</small></h3>
     <hr>
     <div class="text-center">
         <table>
             <tr>
                 <td>
-                    군집 개수
+                    
                 </td>
                 <td>
-                    {{n_cluster}}
+                    
                 </td>
             </tr>
             <tr>
