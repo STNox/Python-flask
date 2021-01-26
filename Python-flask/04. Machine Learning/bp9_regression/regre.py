@@ -1,10 +1,12 @@
 from flask import Blueprint, render_template, request, current_app
 import pandas as pd
+import numpy as np
 import joblib, os
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from utils.weather import cur_weather
+from utils.scatter import get_scatter
 
 regre_bp = Blueprint('regre_bp', __name__)
 
@@ -38,3 +40,51 @@ def iris():
             pred=pred, index=index, feature=feature, 
             X=X, ft_name=ft_name
         )
+
+@regre_bp.route('/diabetes', methods=['GET', 'POST'])
+def diabetes():
+    df = pd.read_csv('./static/data/diabetes_test.csv')
+    feature_list = df.columns.tolist()[:-1]
+    if request.method == 'GET':
+        return render_template('/regression/diabetes.html', menu=menu, weather=cur_weather(), list=feature_list)
+    else:
+        index = int(request.form['index'])
+        feature = request.form['feature']
+        X = df.loc[index, feature]
+        label = df.iloc[index, -1]
+        lr = joblib.load(f'./static/model/diabetes_{feature}_lr.pkl')
+        weight = lr.coef_
+        bias = lr.intercept_
+        mtime = get_scatter(df[feature], df.iloc[:, -1], weight, bias)
+        pred = round((X * weight + bias)[0], 2)
+
+        return render_template(
+            '/regression/diabetes_res.html', 
+            menu=menu, weather=cur_weather(), 
+            pred=pred, index=index, feature=feature,
+            list=feature_list, label=label, mtime=mtime
+        )
+
+@regre_bp.route('/boston', methods=['GET', 'POST'])
+def boston():
+    df = pd.read_csv('./static/data/boston_test.csv')
+    columns = df.columns.tolist()[:-1]
+    if request.method == 'GET':
+        return render_template('/regression/boston.html', menu=menu, weather=cur_weather(), columns=columns)
+    else:
+        index = int(request.form['index'])
+        feature = request.form.getlist('feature')
+        fts = ', '.join(str(ft) for ft in feature)
+        feature_dict = dict(zip(columns, [0] * len(columns)))
+        for f in feature:
+            feature_dict.update({f: 1})
+        temp = np.array(list(feature_dict.values()))
+        X = df.iloc[index, :-1].values
+        temp_X = temp * X
+        label = df.iloc[index, -1]
+        lr = joblib.load('./static/model/boston_lr.pkl')
+        weight, bias = lr.coef_, lr.intercept_
+        pred = round(np.dot(temp_X, weight) + bias, 2)
+        result = {'index': index, 'label': label, 'feature': fts, 'pred': pred}
+
+        return render_template('/regression/boston_res.html', menu=menu, weather=cur_weather(), dict=result)
