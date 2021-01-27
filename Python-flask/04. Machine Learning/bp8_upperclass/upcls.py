@@ -43,4 +43,9 @@ def mnist():
         
         return render_template('/upperclass/mnist_res.html', menu=menu, weather=cur_weather(), dict=result_dict, mtime=mtime)
 
-
+@upcls_bp.route('/20news', methods=['GET', 'POST'])
+def newsgroups():
+    if request.method == 'GET':
+        return render_template('/upperclass/20news.html', menu=menu, weather=cur_weather())
+    else:
+        index = int(request.form['index'])
