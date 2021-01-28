@@ -49,3 +49,24 @@ def newsgroups():
         return render_template('/upperclass/20news.html', menu=menu, weather=cur_weather())
     else:
         index = int(request.form['index'])
+
+@upcls_bp.route('/IMDB', methods=['GET', 'POST'])
+def imdb():
+    if request.method == 'GET':
+        return render_template('/upperclass/imdb.html', menu=menu, weather=cur_weather())
+    else:
+        select = request.form['select']
+        df = pd.read_csv('./static/data/imdb_test.csv')
+        cvlr = joblib.load('./static/model/imdb_cvlr.pkl')
+        tvlr = joblib.load('./static/model/imdb_tvlr.pkl')
+        if select == 'text':
+            review = request.form['review']
+        else:
+            index = int(request.form['index'])
+            review = df.loc[index, 'review']
+        pred_cvlr = cvlr.predict([review])
+        pred_tvlr = tvlr.predict([review])
+        p_c = '긍정' if pred_cvlr == 1 else '부정'
+        p_t = '긍정' if pred_tvlr == 1 else '부정'
+
+        return render_template('/upperclass/imdb_res.html', menu=menu, weather=cur_weather(), p_c=p_c, p_t=p_t, review=review)
