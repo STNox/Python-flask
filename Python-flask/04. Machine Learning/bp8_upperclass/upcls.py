@@ -62,7 +62,7 @@ def imdb():
         if select == 'text':
             review = request.form['review']
         else:
-            index = int(request.form['index'])
+            index = int(request.form['index'] or '0')
             review = df.loc[index, 'review']
         pred_cvlr = cvlr.predict([review])
         pred_tvlr = tvlr.predict([review])
