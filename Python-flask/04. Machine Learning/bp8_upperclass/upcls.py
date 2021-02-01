@@ -70,3 +70,31 @@ def imdb():
         p_t = '긍정' if pred_tvlr == 1 else '부정'
 
         return render_template('/upperclass/imdb_res.html', menu=menu, weather=cur_weather(), p_c=p_c, p_t=p_t, review=review)
+
+@upcls_bp.route('/NaverMovie', methods=['GET', 'POST'])
+def naver():
+    if request.method == 'GET':
+        return render_template('/upperclass/naver.html', menu=menu, weather=cur_weather())
+    else:
+        select = request.form['select']
+        df = pd.read_csv('./static/data/NaverMovie/test.tsv', sep='\t')
+        cvlr = joblib.load('./static/model/nm_cl.pkl')
+        cvnb = joblib.load('./static/model/nm_cn.pkl')
+        tvlr = joblib.load('./static/model/nm_tl.pkl')
+        tvnb = joblib.load('./static/model/nm_tn.pkl')
+        if select == 'text':
+            review = request.form['review']
+        else:
+            index = int(request.form['index'] or '0')
+            review = df.loc[index, 'document']
+        pred_cvlr = cvlr.predict([review])
+        pred_cvnb = cvnb.predict([review])
+        pred_tvlr = tvlr.predict([review])
+        pred_tvnb = cvnb.predict([review])
+        p_cl = '긍정' if pred_cvlr == 1 else '부정'
+        p_cn = '긍정' if pred_cvnb == 1 else '부정'
+        p_tl = '긍정' if pred_tvlr == 1 else '부정'
+        p_tn = '긍정' if pred_tvnb == 1 else '부정'
+        result = {'review': review, 'p_cl': p_cl, 'p_cn': p_cn, 'p_tl': p_tl, 'p_tn': p_tn}
+        
+        return render_template('/upperclass/naver_res.html', menu=menu, weather=cur_weather(), result=result)
