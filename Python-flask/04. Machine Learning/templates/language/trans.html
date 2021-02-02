@@ -1,0 +1,40 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>한국어 → 외국어 번역</h3>
+    <hr>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <form method="post">
+                <table class='table table-borderless'>
+                    <tr>
+                        <td width="25%" class="align-middle" style="text-align: left;">
+                            한국어 텍스트 입력
+                        </td>
+                        <td width="75%" style="text-align: left;">
+                            <textarea class="form-control" style="resize: none" name="text" id="text" cols="80" rows="15"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="25%" class="align-middle" style="text-align: left;">
+                            다음 언어로 번역:
+                        </td>
+                        <td width="75%" style="text-align: center;">
+                            <input type="radio" name="lang" value="English"> 영어&nbsp;
+                            <input type="radio" name="lang" value="Japanese"> 일본어&nbsp;
+                            <input type="radio" name="lang" value="Chinese"> 중국어&nbsp;
+                            <input type="radio" name="lang" value="French"> 프랑스어
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">실행</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div class="col-2"></div>
+{% endblock %}

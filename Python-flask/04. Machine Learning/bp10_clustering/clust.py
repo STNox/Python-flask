@@ -9,7 +9,7 @@ from utils.weather import cur_weather
 
 clust_bp = Blueprint('clust_bp', __name__)
 
-menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 0, 'ac': 0, 're': 0, 'cl': 1}
+menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 0, 'ac': 0, 're': 0, 'cl': 1, 'la': 0}
 
 @clust_bp.route('/clust', methods=['GET', 'POST'])
 def clust():

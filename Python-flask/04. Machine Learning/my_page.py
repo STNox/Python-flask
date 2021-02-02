@@ -15,6 +15,7 @@ from bp7_classification.clsft import clsft_bp
 from bp8_upperclass.upcls import upcls_bp
 from bp9_regression.regre import regre_bp
 from bp10_clustering.clust import clust_bp
+from bp11_language.lang import lang_bp
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -40,6 +41,7 @@ app.register_blueprint(clsft_bp, url_prefix='/class')
 app.register_blueprint(upcls_bp, url_prefix='/upcls')
 app.register_blueprint(regre_bp, url_prefix='/regre')
 app.register_blueprint(clust_bp, url_prefix='/clust')
+app.register_blueprint(lang_bp, url_prefix='/lang')
 
 ''' def get_weather_main():
     weather = None

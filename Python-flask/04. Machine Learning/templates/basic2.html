@@ -89,6 +89,14 @@
                     <li class="nav-item">
                         <a id="li_clust" class="nav-link {% if menu.cl %}bg-danger text-white{% endif %}" href="/clust/clust">군집화/PCA</a>
                     </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item dropdown">
+                        <a id="li_lang" class="nav-link dropdown-toggle {% if menu.la %}bg-danger text-white{% endif %}" data-toggle="dropdown" href="#">언어</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" style="text-align: right" href="/lang/translate">번역</a>
+                            <a class="dropdown-item" style="text-align: right" href="/lang/tts">TTS</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
             {% block content %}{% endblock %}

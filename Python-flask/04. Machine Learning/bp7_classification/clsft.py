@@ -6,7 +6,7 @@ from utils.weather import cur_weather
 
 clsft_bp = Blueprint('clsft_bp', __name__)
 
-menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 1, 'ac': 0, 're': 0, 'cl': 0}
+menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 1, 'ac': 0, 're': 0, 'cl': 0, 'la': 0}
 
 @clsft_bp.route('/cancer', methods=['GET', 'POST'])
 def cancer():

@@ -9,7 +9,7 @@ from utils.weather import cur_weather
 
 upcls_bp = Blueprint('upcls_bp', __name__)
 
-menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 0, 'ac': 1, 're': 0, 'cl': 0}
+menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 0, 'ac': 1, 're': 0, 'cl': 0, 'la': 0}
 scaler = MinMaxScaler()
 digits = load_digits()
 

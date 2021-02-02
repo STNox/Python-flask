@@ -10,7 +10,7 @@ from utils.scatter import get_scatter
 
 regre_bp = Blueprint('regre_bp', __name__)
 
-menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 0, 'ac': 0, 're': 1, 'cl': 0}
+menu = {'ho': 0, 'da': 0, 'ml': 1, 'cf': 0, 'ac': 0, 're': 1, 'cl': 0, 'la': 0}
 
 @regre_bp.route('/iris', methods=['GET', 'POST'])
 def iris():
