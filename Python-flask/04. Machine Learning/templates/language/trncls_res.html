@@ -1,0 +1,33 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>결과</h3>
+    <hr>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <table class='table table'>
+                <tr>
+                    <td width="25%">원문</td>
+                    <td width="75%" style="text-align: justify;">{{result.text}}</td>
+                </tr>
+                <tr>
+                    <td width="25%">번역문</td>
+                    <td width="75%" style="text-align: justify;">{{result.trans}}</td>
+                </tr>
+                <tr>
+                    <td width="25%">원문 감성분석</td>
+                    <td width="75%" style="text-align: justify;">{{result.pred_org}}</td>
+                </tr>
+                <tr>
+                    <td width="25%">번역문 감성분석</td>
+                    <td width="75%" style="text-align: justify;">{{result.pred_trn}}</td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <button class="btn btn-primary" onclick="location.href='/lang/trn_cls'">돌아가기</button>
+            </div>
+            <div class="col-2"></div>
+{% endblock %}

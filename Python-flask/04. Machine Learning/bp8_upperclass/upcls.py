@@ -90,7 +90,7 @@ def naver():
         pred_cvlr = cvlr.predict([review])
         pred_cvnb = cvnb.predict([review])
         pred_tvlr = tvlr.predict([review])
-        pred_tvnb = cvnb.predict([review])
+        pred_tvnb = tvnb.predict([review])
         p_cl = '긍정' if pred_cvlr == 1 else '부정'
         p_cn = '긍정' if pred_cvnb == 1 else '부정'
         p_tl = '긍정' if pred_tvlr == 1 else '부정'

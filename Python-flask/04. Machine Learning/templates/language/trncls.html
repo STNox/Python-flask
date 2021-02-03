@@ -1,0 +1,38 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>영화평 번역 & 감성 분석</h3>
+    <hr>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <form method="post">
+                <table class='table table-borderless'>
+                    <tr>
+                        <td width="25%" class="align-middle" style="text-align: left;">
+                           텍스트 입력
+                        </td>
+                        <td width="75%" style="text-align: left;">
+                            <textarea class="form-control" style="resize: none" name="text" id="text" cols="80" rows="15"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="25%" class="align-middle" style="text-align: left;">
+                            번역 설정
+                        </td>
+                        <td width="75%" style="text-align: center;">
+                            <input type="radio" name="trans_type" value="ko_en"> 한 → 영&nbsp;
+                            <input type="radio" name="trans_type" value="en_ko"> 영 → 한&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">실행</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div class="col-2"></div>
+{% endblock %}
