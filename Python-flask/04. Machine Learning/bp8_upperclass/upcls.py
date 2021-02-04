@@ -49,6 +49,18 @@ def newsgroups():
         return render_template('/upperclass/20news.html', menu=menu, weather=cur_weather())
     else:
         index = int(request.form['index'])
+        df = pd.read_csv('./static/data/news_test.csv')
+        X = df.loc[index, '0']
+        label = df.loc[index, 'target']
+        cl = joblib.load('./static/model/news_cl.pkl')
+        tl = joblib.load('./static/model/news_tl.pkl')
+        ts = joblib.load('./static/model/news_ts.pkl')
+        pred_cl = cl.predict([X])
+        pred_tl = tl.predict([X])
+        pred_ts = ts.predict([X])
+        result = {'index': index, 'label': label, 'pred_cl': pred_cl, 'pred_tl': pred_tl, 'pred_ts': pred_ts, 'article': X}
+
+        return render_template('/upperclass/20news_res.html', menu=menu, weather=cur_weather(), result=result)
 
 @upcls_bp.route('/IMDB', methods=['GET', 'POST'])
 def imdb():

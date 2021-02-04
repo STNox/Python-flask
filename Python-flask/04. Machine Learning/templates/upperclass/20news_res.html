@@ -1,0 +1,38 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>뉴스 분석 결과 - <small>인덱스 값: {{result.index}}</small></h3>
+    <hr>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class='table table-bordered'>
+                <tr>
+                    <td colspan="2" style="text-align: center;">실제 라벨 값</td>
+                    <td style="text-align: center;">{{result.label}}</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="align-middle" style="text-align: center;">예측 값</td>
+                    <td>CounterVectorizer + 로지스틱 회귀</td>
+                    <td style="text-align: center;">{{result.pred_cl[0]}}</td>
+                </tr>
+                <tr>
+                    <td>TfidfVectorizer + 로지스틱 회귀</td>
+                    <td style="text-align: center;">{{result.pred_tl[0]}}</td>
+                </tr>
+                <tr>
+                    <td>TfidfVectorizer + 서포트 벡터 머신</td>
+                    <td style="text-align: center;">{{result.pred_ts[0]}}</td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <button class="btn btn-primary" onclick="location.href='/upcls/20news'">돌아가기</button>
+            </div>
+            <br>
+            <div style="text-align: justify;">
+                {{result.article}}
+            </div>
+            <div class="col-2"></div>
+{% endblock %}
