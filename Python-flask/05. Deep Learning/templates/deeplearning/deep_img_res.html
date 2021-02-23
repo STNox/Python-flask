@@ -1,0 +1,41 @@
+{% extends "basic3.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>딥 러닝 - 이미지 분석 결과</h3>
+    <hr>
+    <div class="text-center">
+        <table>
+            <tr>
+                <td>
+                    <img src="{{url_for('static', filename='img/class_img.jpg', q=mtime)}}" alt="이미지" width="1000px">
+                </td>
+            </tr>
+            <tr>
+                <td>VGG16</td>
+                <td>
+                    {{ result[0] }}
+                </td>
+            </tr>
+            <tr>
+                <td>VGG19</td>
+                <td>
+                    {{ result[1] }}
+                </td>
+            </tr>
+            <tr>
+                <td>GoogLeNet</td>
+                <td>
+                    {{ result[2] }}
+                </td>
+            </tr>
+            <tr>
+                <td>ResNet</td>
+                <td>
+                    {{ result[3] }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

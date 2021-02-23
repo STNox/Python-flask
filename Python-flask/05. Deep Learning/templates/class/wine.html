@@ -1,0 +1,29 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>와인 데이터</h3>
+    <hr>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form method="post">
+                <table class='table table-borderless'>
+                    <tr>
+                        <td class="align-middle" style="text-align: right;">
+                            인덱스 입력
+                        </td>
+                        <td style="text-align: left;">
+                            <input type="text" class="form-control" name="index" placeholder="0-44 사이의 숫자 입력">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">실행</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div class="col-2"></div>
+{% endblock %}

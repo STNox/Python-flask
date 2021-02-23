@@ -1,0 +1,58 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>유방암 데이터 분류 결과 - <small>인덱스: {{result.index}}</small></h3>
+    <hr>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class='table table'>
+                <tr>
+                    <td>
+                        라벨(실제 값)
+                    </td>
+                    <td></td>
+                    <td>
+                        {{result.label}}
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="align-middle">
+                        예측 값
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        결정 트리
+                    </td>
+                    <td>
+                        {{result.pred_dt}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        SVM
+                    </td>
+                    <td>
+                        {{result.pred_sv}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        로지스틱 회귀
+                    </td>
+                    <td>
+                        {{result.pred_lr}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <button class="btn btn-primary" onclick="location.href='/class/cancer'">돌아가기</button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <div class="col-2"></div>
+{% endblock %}

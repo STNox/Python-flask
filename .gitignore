@@ -26,6 +26,7 @@ station_data
 gov_data_api_key.txt
 bootstrap*
 static/
+gallery/
 weatherkey.txt
 
 # Remove previous ipynb_checkpoints

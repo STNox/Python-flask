@@ -1,0 +1,37 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>회귀 결과</h3>
+    <hr>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h5>인덱스 값: {{dict.index}}</h5>
+            <h5>feature: <strong>{{dict.feature}}</strong></h5><br>
+            <table class='table table-sm'>
+                <tr>
+                    <td class="align-middle" style="text-align: center;">
+                        실제 값
+                    </td>
+                    <td class="align-middle" style="text-align: center;">
+                        예측 값
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        {{dict.label}}
+                    </td>
+                    <td style="text-align: center;">
+                        {{dict.pred}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <button class="btn btn-primary" onclick="location.href='/regre/boston'">돌아가기</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="col-3"></div>
+{% endblock %}

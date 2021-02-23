@@ -1,0 +1,49 @@
+{% extends "basic.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block another_head %}
+<style type="text/css"> 
+    .table {
+        width: 100%;
+        table-layout: fixed;
+    }
+    .table tbody td {
+        font-size: 13px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>실시간 음악 차트</h3>
+    <hr>
+    <table class="table table">
+        <tr>
+            <th style="width: 7%; text-align: center">순위</th>
+            <th colspan="2">벅스</th>
+            <th colspan="2">멜론</th>
+            <th colspan="2">지니</th>
+        </tr>
+        <tbody>
+            {% for i in range(10) %}
+                <tr>
+                    <td rowspan="2" align="middle">{{i + 1}}</td>
+                    <td style="width: 10%" rowspan="2"><img src="{{ bugs[i][0] }}" alt="벅스 순위" width="100px"></td>
+                    <td data-toggle="tooltip" title="{{ bugs[i][1] }}" style="width: 21%"><strong>{{ bugs[i][1] }}</strong></td>
+                    <td style="width: 10%" rowspan="2"><img src="{{ melon[i][0] }}" alt="멜론 순위" width="100px"></td>
+                    <td data-toggle="tooltip" title="{{ melon[i][1] }}" style="width: 21%"><strong>{{ melon[i][1] }}</strong></td>
+                    <td style="width: 10%" rowspan="2"><img src="{{ genie[i][0] }}" alt="지니 순위" width="100px"></td>
+                    <td data-toggle="tooltip" title="{{ genie[i][1] }}" style="width: 21%"><strong>{{ genie[i][1] }}</strong></td>
+                </tr>
+                <tr>
+                    <td data-toggle="tooltip" title="{{ bugs[i][2] }}" style="width: 21%">{{ bugs[i][2] }}</td>
+                    <td data-toggle="tooltip" title="{{ melon[i][2] }}" style="width: 21%">{{ melon[i][2] }}</td>
+                    <td data-toggle="tooltip" title="{{ genie[i][2] }}" style="width: 21%">{{ genie[i][2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

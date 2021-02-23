@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='fontawesome-free-5.15.1-web/css/all.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/favicon.ico')}}">
+    <script src="{{url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <style type="text/css">
+        a:link {color: black; text-decoration: none;}
+        a:visited{color: black; text-decoration: none;}
+        a:hover{color: red; text-decoration: underline;}
+        .rounded-circle {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 6px;
+            background-color:lightblue;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+    </style>
+    <title>Deep Learning</title>
+    {% block another_head %}{% endblock %}
+</head>
+<body>
+    <nav id="top" class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='img/hanguel.png')}}" alt="테스트" height="40px" style="margin-left: 10px;">
+        </a>
+        <!-- Links -->
+        <ul class="nav mr-auto nav-pills">
+            <li class="nav-item">
+                <a class="nav-link {% if menu.da %}bg-secondary{% endif %}" style="color: white; margin-left: 5px;" href="/main"><i class="far fa-chart-bar" style="margin-right: 10px"></i>데이터분석</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if menu.ml %}bg-secondary{% endif %}" style="color: white" href="/MaLe"><i class="fas fa-network-wired" style="margin-right: 10px"></i>머신 러닝</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if menu.dl %}bg-secondary{% endif %}" style="color: white" href="/DeLe"><i class="fas fa-network-wired" style="margin-right: 10px"></i>딥 러닝</a>
+            </li>
+        </ul>
+        <div class="navbar-text fixed-right rounded-lg" id="weather" style="color:white; margin-right: 30px">
+            {% block weather %}{% endblock %}
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-2" style="margin-top: 40px;">
+                <ul class="nav flex-column nav-pills" style="margin-top: 5px; text-align: right">
+                    <li class="nav-item">
+                        <a id="li_image" class="nav-link {% if menu.img %}bg-danger text-white{% endif %}" href="/Deep-Learning/image">이미지분류</a>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item">
+                        <a id="li_text" class="nav-link {% if menu.txt %}bg-danger text-white{% endif %}" href="#">텍스트 감성분류</a>
+                    </li>
+                </ul>
+            </div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <br><br><br><br>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-light fixed-bottom">
+        <span class="navbar-text">Copyright &copy; 2020, WY</span>
+    </nav>
+    {% block additional_body %}{% endblock %}
+</body>
+</html>

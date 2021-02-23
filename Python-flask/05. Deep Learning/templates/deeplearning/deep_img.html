@@ -1,0 +1,18 @@
+{% extends "basic3.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+{% block content %}
+<div class="col-10" style="margin-top: 40px;">
+    <h3>딥 러닝 - 이미지 분석</h3>
+    <hr>
+    <div class="text-center">
+        <br>
+        <form method="post" enctype="multipart/form-data">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="image" name="image">
+                <label class="custom-file-label" for="raw_data">데이터 파일 선택</label>
+            </div>
+            <button class="btn btn-primary" type="submit">보기</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "basic2.html" %}
+{% block weather %}{{ weather | safe() }}{% endblock %}
+
+{% block content %}
+<div class="col-10 mb-10" style="margin-top: 40px;">
+    <h3>IMDB 영화평 감성 분석</h3>
+    <hr>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <form method="post">
+                <table class='table table-borderless'>
+                    <tr>
+                        <td width="20%" class="align-middle" style="text-align: left;">
+                            <input type="radio" class="form-check-input" name="select" value="test" checked> 테스트 데이터 입력
+                        </td>
+                        <td width="80%" style="text-align: left;">
+                            <input type="text" class="form-control" name="index" placeholder="0-6249 사이의 숫자(인덱스) 입력">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%" class="align-middle" style="text-align: left;">
+                            <input type="radio" class="form-check-input" name="select" value="text"> 리뷰 입력
+                            <input name="index" value="10000" type="hidden">
+                        </td>
+                        <td width="80%" style="text-align: left;">
+                            <textarea class="form-control" style="resize: none" name="review" id="review" cols="80" rows="15"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">실행</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div class="col-2"></div>
+{% endblock %}
