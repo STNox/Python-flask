@@ -7,10 +7,11 @@
     <div class="text-center">
         <table>
             <tr>
-                <td>
-                    <img src="{{url_for('static', filename='img/class_img.jpg', q=mtime)}}" alt="이미지" width="1000px">
+                <td colspan="2" style='text-align: center'>
+                    <img src="{{url_for('static', filename='img/class_img.jpg', q=mtime)}}" alt="이미지" width="800px">
                 </td>
             </tr>
+            <tr><td colspan="2"></td></tr>
             <tr>
                 <td>VGG16</td>
                 <td>
@@ -33,6 +34,11 @@
                 <td>ResNet</td>
                 <td>
                     {{ result[3] }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button class="btn btn-primary" onclick="location.href='/Deep-Learning/image'">돌아가기</button>
                 </td>
             </tr>
         </table>
