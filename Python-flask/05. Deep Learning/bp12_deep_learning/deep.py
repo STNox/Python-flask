@@ -1,6 +1,7 @@
-import os, cv2
+import os, cv2, json, urllib3, base64
 import numpy as np
-from PIL import Image
+from bp12_deep_learning import etri
+from PIL import Image, ImageDraw, ImageFont
 from flask import Blueprint, render_template, request, current_app
 from tensorflow.keras.applications.vgg16 import VGG16, decode_predictions
 from tensorflow.keras.applications.vgg19 import VGG19
@@ -13,7 +14,7 @@ deep_bp = Blueprint('deep_bp', __name__)
 
 @deep_bp.route('/image', methods=['GET', 'POST'])
 def deep_img():
-    menu = {'ho': 0, 'da': 0, 'ml': 0, 'dl': 1, 'img': 1, 'txt': 0}
+    menu = {'ho': 0, 'da': 0, 'ml': 0, 'dl': 1, 'etimg': 0, 'img': 1, 'txt': 0}
     vgg16 = VGG16()
     vgg19 = VGG19()
     incpt = InceptionV3(input_shape=(299, 299, 3))
@@ -48,4 +49,17 @@ def deep_img():
         mtime = int(os.stat(img).st_mtime)
 
         return render_template('/deeplearning/deep_img_res.html', menu=menu, weather=cur_weather(), result=result, mtime=mtime)
-        
+
+@deep_bp.route('/etri_image', methods=['GET', 'POST'])
+def etri_image():
+    menu = {'ho': 0, 'da': 0, 'ml': 0, 'dl': 1, 'etimg': 1, 'img': 0, 'txt': 0}
+    if request.method == 'GET':
+        return render_template('/deeplearning/etri_img.html', menu=menu, weather=cur_weather())
+    else:
+        image = request.files['image']
+        img = os.path.join(current_app.root_path, 'static/img/') + 'etri_img.jpg'
+        image.save(img)
+        object_img = etri.etri_img()
+        mtime = int(os.stat(object_img).st_mtime)
+
+        return render_template('/deeplearning/etri_img_res.html', menu=menu, weather=cur_weather(), mtime=mtime)
